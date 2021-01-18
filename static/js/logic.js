@@ -86,4 +86,45 @@ d3.json(queryUrl, function(data) {
           layer.bindPopup("Magnitude: " + feature.properties.mag + "<br>Location: " + feature.properties.place);
         }
       }).addTo(myMap);
+    
+   // Add legend to the map
+  var legend = L.control({position: 'bottomright'});
+  legend.onAdd = function () {
+      var div = L.DomUtil.create('div', 'info legend');
+      magni = [0, 1, 2, 3, 4, 5];
+      var colors = [
+        "#98ee00",
+        "#d4ee00",
+        "#eecc00",
+        "#ee9c00",
+        "#ea822c",
+        "#ea2c2c"
+      ];
+      labels =[]
+      for (var i = 0; i < magni.length; i++) {
+        div.innerHTML +=
+            '<i style="background:' + chooseColor(magni[i] + 1) + '"></i> ' +
+            magni[i] + (magni[i + 1] ? '&ndash;' + magni[i + 1] + '<br>' : '+');
+    }
+     
+    magni.forEach(function(m, index) {
+        labels.push("<li style=\"background-color: " + colors[index] + "\"></li>");
+      });
+      return div;
+  };
+  
+  legend.addTo(myMap);
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     });
